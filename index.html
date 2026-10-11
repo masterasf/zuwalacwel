@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LexiLearn — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0f0e17;--surface:#1a1825;--surface2:#231f35;--accent:#ff6b6b;--accent2:#ffd93d;--text:#fffffe;--text2:#a7a9be;--border:#2e2a45;--card-radius:20px; }
+  .theme-ocean { --bg:#0a1628;--surface:#112240;--surface2:#1a3356;--accent:#64ffda;--accent2:#f7c59f;--text:#ccd6f6;--text2:#8892b0;--border:#233554; }
+  .theme-forest { --bg:#0d1f0d;--surface:#162716;--surface2:#1e3a1e;--accent:#a8e063;--accent2:#f7dc6f;--text:#e8f5e9;--text2:#81c784;--border:#2e5e2e; }
+  .theme-candy { --bg:#ffeef8;--surface:#fff0fb;--surface2:#ffe4f7;--accent:#e91e8c;--accent2:#7c3aed;--text:#1a001a;--text2:#6b3070;--border:#f0b8e0; }
+  .theme-sunset { --bg:#1a0a00;--surface:#2d1500;--surface2:#3d1f00;--accent:#ff8c42;--accent2:#ffe66d;--text:#fff8f0;--text2:#c4956a;--border:#5c3010; }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Nunito',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; transition:all 0.4s; overflow-x:hidden; }
+  body::before { content:''; position:fixed; top:-200px; right:-200px; width:500px; height:500px; background:radial-gradient(circle,color-mix(in srgb,var(--accent) 12%,transparent) 0%,transparent 70%); pointer-events:none; z-index:0; }
+  body::after { content:''; position:fixed; bottom:-200px; left:-200px; width:500px; height:500px; background:radial-gradient(circle,color-mix(in srgb,var(--accent2) 10%,transparent) 0%,transparent 70%); pointer-events:none; z-index:0; }
+  .app { max-width:900px; margin:0 auto; padding:32px 16px; position:relative; z-index:1; }
+  header { display:flex; align-items:center; justify-content:space-between; margin-bottom:48px; flex-wrap:wrap; gap:16px; }
+  .logo { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:800; letter-spacing:-1px; }
+  .logo span { color:var(--accent); }
+  .logo-sub { font-size:0.85rem; color:var(--text2); font-weight:600; margin-top:2px; }
+  .theme-picker { display:flex; gap:8px; align-items:center; }
+  .theme-picker label { font-size:0.72rem; color:var(--text2); text-transform:uppercase; letter-spacing:1px; font-weight:700; }
+  .theme-btn { width:28px; height:28px; border-radius:50%; border:2px solid transparent; cursor:pointer; transition:transform 0.2s,border-color 0.2s; }
+  .theme-btn:hover,.theme-btn.active { transform:scale(1.2); border-color:var(--text); }
+  .theme-btn.t-dark { background:linear-gradient(135deg,#ff6b6b,#ffd93d); }
+  .theme-btn.t-ocean { background:linear-gradient(135deg,#64ffda,#0a1628); }
+  .theme-btn.t-forest { background:linear-gradient(135deg,#56ab2f,#a8e063); }
+  .theme-btn.t-candy { background:linear-gradient(135deg,#e91e8c,#7c3aed); }
+  .theme-btn.t-sunset { background:linear-gradient(135deg,#ff8c42,#ffe66d); }
+  .section-title { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:2px; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .sets-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin-bottom:40px; }
+  .set-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--card-radius); padding:24px; cursor:pointer; transition:all 0.25s; text-decoration:none; color:var(--text); display:block; position:relative; overflow:hidden; }
+  .set-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--card-accent,var(--accent)); transition:height 0.25s; }
+  .set-card:hover { transform:translateY(-4px); border-color:var(--card-accent,var(--accent)); box-shadow:0 12px 30px rgba(0,0,0,0.3); }
+  .set-card:hover::before { height:5px; }
+  .set-emoji { font-size:2.2rem; margin-bottom:12px; display:block; }
+  .set-title { font-family:'Syne',sans-serif; font-size:1.15rem; font-weight:700; margin-bottom:6px; }
+  .set-desc { font-size:0.82rem; color:var(--text2); line-height:1.5; margin-bottom:14px; }
+  .set-count { display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:700; color:var(--text2); background:var(--surface2); border:1px solid var(--border); padding:4px 10px; border-radius:100px; }
+  .set-count strong { color:var(--card-accent,var(--accent)); }
+  .set-card.all-sets { background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 15%,var(--surface)),var(--surface)); border-color:color-mix(in srgb,var(--accent) 40%,var(--border)); }
+  .set-card.all-sets .set-title { color:var(--accent); }
+  .add-hint { background:var(--surface); border:1px dashed var(--border); border-radius:var(--card-radius); padding:32px; text-align:center; color:var(--text2); font-size:0.9rem; line-height:1.8; }
+  .add-hint code { font-family:monospace; background:var(--surface2); padding:2px 8px; border-radius:6px; font-size:0.85rem; color:var(--accent2); }
+  .add-hint .icon { font-size:2rem; margin-bottom:10px; display:block; }
+  .add-hint strong { color:var(--text); }
+  @media(max-width:500px){ .sets-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <div class="logo">Lexi<span>Learn</span></div>
+      <div class="logo-sub">Wybierz zestaw słówek</div>
+    </div>
+    <div class="theme-picker">
+      <label>Motyw</label>
+      <button class="theme-btn t-dark active" onclick="setTheme('')"></button>
+      <button class="theme-btn t-ocean" onclick="setTheme('ocean')"></button>
+      <button class="theme-btn t-forest" onclick="setTheme('forest')"></button>
+      <button class="theme-btn t-candy" onclick="setTheme('candy')"></button>
+      <button class="theme-btn t-sunset" onclick="setTheme('sunset')"></button>
+    </div>
+  </header>
+  <div class="section-title">Zestawy słówek</div>
+  <div class="sets-grid" id="sets-grid"></div>
+  <div class="section-title">Dodaj własny zestaw</div>
+  <div class="add-hint">
+    <span class="icon">📁</span>
+    <strong>Jak dodać nowy zestaw?</strong><br><br>
+    Dodaj nowy obiekt do <code>VOCAB_SETS</code> w tym pliku i w <code>quiz.html</code>,<br>
+    oraz dopisz jego <code>id</code> do tablicy <code>SET_ORDER</code>. 🎉
+  </div>
+</div>
+<script>
+// ══════════════════════════════════════════
+//  SŁÓWKA — edytuj tutaj
+// ══════════════════════════════════════════
+const VOCAB_SETS = {
+
+"angielski-badania": {
+  id:"angielski-badania", title:"Badania i hipotezy", emoji:"🔬",
+  description:"Słownictwo związane z badaniami naukowymi, hipotezami i wnioskami", color:"#38bdf8",
+  words:[
+    ["compile statistics","sporządzać statystyki"],
+    ["comply (with sth)","dostosować się do czegoś"],
+    ["confirm findings/hypotheses","potwierdzać wyniki/hipotezy"],
+    ["evaluate/falsify results","oceniać/fałszować wyniki"],
+    ["formulate/put forward/refine/reject a hypothesis","sformułować/przedstawić/uściślić/odrzucić hipotezę"],
+    ["hasty/inescapable/inevitable conclusion","pospieszna/nieuchronna/oczywista konkluzja"],
+    ["jump/leap to conclusions","wyciągać pochopne wnioski"],
+    ["keep a record of sth","prowadzić zapis czegoś"],
+    ["make a major/significant breakthrough","dokonać znaczącego przełomu"],
+    ["obtain evidence to support sth","zdobyć dowody na poparcie czegoś"],
+    ["pose questions/carry out trials","stawiać pytania/przeprowadzać badania"],
+    ["take out a patent","uzyskać patent"]
+  ]
+},
+
+"angielski-wynalazki": {
+  id:"angielski-wynalazki", title:"Wynalazki", emoji:"💡",
+  description:"Nazwy wynalazków i przedmiotów codziennego użytku", color:"#f59e0b",
+  words:[
+    ["atomic bomb","bomba atomowa"],
+    ["ballpoint pen","długopis"],
+    ["correction fluid","korektor w płynie"],
+    ["food canning process","proces konserwowania żywności"],
+    ["gunpowder","proch strzelniczy"],
+    ["internal combustion engine","silnik spalinowy"],
+    ["Morse code","alfabet Morse'a"],
+    ["paraffin lamp (BrE)/kerosene lamp (AmE)","lampa naftowa"],
+    ["printing press","prasa drukarska"],
+    ["safety pin","agrafka"],
+    ["sewing machine","maszyna do szycia"],
+    ["stainless steel","stal nierdzewna"],
+    ["steam engine/locomotive","parowóz"],
+    ["surveillance camera","kamera monitorująca"],
+    ["synthetic fibre","włókno syntetyczne"],
+    ["vacuum pump","pompa próżniowa"],
+    ["wheelie luggage","walizka na kółkach"]
+  ]
+},
+
+"angielski-urzadzenia": {
+  id:"angielski-urzadzenia", title:"Urządzenia i instrukcje", emoji:"🔌",
+  description:"Montaż, konfiguracja i obsługa urządzeń elektrycznych", color:"#14b8a6",
+  words:[
+    ["adapter/adaptor","przejściówka"],
+    ["adjust","regulować"],
+    ["assemble","zmontować"],
+    ["earth (BrE)/ground (AmE)","uziemienie; uziemić"],
+    ["extension lead (BrE)/cord (AmE)","przedłużacz"],
+    ["follow safety/assembly/setup instructions","postępować zgodnie z instrukcją bezpieczeństwa/montażu/konfiguracji"]
+  ]
+}
+
+};
+
+// Kolejność kart w menu
+const SET_ORDER = [
+  "angielski-badania",
+  "angielski-wynalazki",
+  "angielski-urzadzenia"
+];
+
+function setTheme(t) {
+  document.body.className = t ? 'theme-'+t : '';
+  try { localStorage.setItem('ll-theme', t); } catch(e){}
+  document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+  const map = {'':'t-dark','ocean':'t-ocean','forest':'t-forest','candy':'t-candy','sunset':'t-sunset'};
+  document.querySelector('.'+map[t]).classList.add('active');
+}
+try { setTheme(localStorage.getItem('ll-theme')||''); } catch(e){ setTheme(''); }
+
+function renderGrid() {
+  const grid = document.getElementById('sets-grid');
+  const total = Object.values(VOCAB_SETS).reduce((a,s)=>a+s.words.length,0);
+
+  const allCard = document.createElement('a');
+  allCard.className = 'set-card all-sets';
+  allCard.href = 'quiz.html?sets=ALL';
+  allCard.innerHTML = `<span class="set-emoji">🌍</span><div class="set-title">Wszystkie słówka</div><div class="set-desc">Wszystkie zestawy razem — maksymalne wyzwanie!</div><span class="set-count"><strong>${total}</strong> słówek</span>`;
+  grid.appendChild(allCard);
+
+  SET_ORDER.forEach(id => {
+    const s = VOCAB_SETS[id];
+    if (!s) return;
+    const card = document.createElement('a');
+    card.className = 'set-card';
+    card.style.setProperty('--card-accent', s.color);
+    card.href = 'quiz.html?sets='+id;
+    card.innerHTML = `<span class="set-emoji">${s.emoji}</span><div class="set-title">${s.title}</div><div class="set-desc">${s.description}</div><span class="set-count"><strong>${s.words.length}</strong> słówek</span>`;
+    grid.appendChild(card);
+  });
+}
+
+renderGrid();
+</script>
+</body>
+</html>
