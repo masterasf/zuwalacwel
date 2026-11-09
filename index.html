@@ -84,59 +84,56 @@
 // ══════════════════════════════════════════
 const VOCAB_SETS = {
 
-"angielski-badania": {
-  id:"angielski-badania", title:"Badania i hipotezy", emoji:"🔬",
-  description:"Słownictwo związane z badaniami naukowymi, hipotezami i wnioskami", color:"#38bdf8",
-  words:[
-    ["compile statistics","sporządzać statystyki"],
-    ["comply (with sth)","dostosować się do czegoś"],
-    ["confirm findings/hypotheses","potwierdzać wyniki/hipotezy"],
-    ["evaluate/falsify results","oceniać/fałszować wyniki"],
-    ["formulate/put forward/refine/reject a hypothesis","sformułować/przedstawić/uściślić/odrzucić hipotezę"],
-    ["hasty/inescapable/inevitable conclusion","pospieszna/nieuchronna/oczywista konkluzja"],
-    ["jump/leap to conclusions","wyciągać pochopne wnioski"],
-    ["keep a record of sth","prowadzić zapis czegoś"],
-    ["make a major/significant breakthrough","dokonać znaczącego przełomu"],
-    ["obtain evidence to support sth","zdobyć dowody na poparcie czegoś"],
-    ["pose questions/carry out trials","stawiać pytania/przeprowadzać badania"],
-    ["take out a patent","uzyskać patent"]
-  ]
-},
-
-"angielski-wynalazki": {
-  id:"angielski-wynalazki", title:"Wynalazki", emoji:"💡",
-  description:"Nazwy wynalazków i przedmiotów codziennego użytku", color:"#f59e0b",
-  words:[
-    ["atomic bomb","bomba atomowa"],
-    ["ballpoint pen","długopis"],
-    ["correction fluid","korektor w płynie"],
-    ["food canning process","proces konserwowania żywności"],
-    ["gunpowder","proch strzelniczy"],
-    ["internal combustion engine","silnik spalinowy"],
-    ["Morse code","alfabet Morse'a"],
-    ["paraffin lamp (BrE)/kerosene lamp (AmE)","lampa naftowa"],
-    ["printing press","prasa drukarska"],
-    ["safety pin","agrafka"],
-    ["sewing machine","maszyna do szycia"],
-    ["stainless steel","stal nierdzewna"],
-    ["steam engine/locomotive","parowóz"],
-    ["surveillance camera","kamera monitorująca"],
-    ["synthetic fibre","włókno syntetyczne"],
-    ["vacuum pump","pompa próżniowa"],
-    ["wheelie luggage","walizka na kółkach"]
-  ]
-},
-
 "angielski-urzadzenia": {
   id:"angielski-urzadzenia", title:"Urządzenia i instrukcje", emoji:"🔌",
-  description:"Montaż, konfiguracja i obsługa urządzeń elektrycznych", color:"#14b8a6",
+  description:"Obsługa, konfiguracja i wymiana elementów urządzeń elektrycznych", color:"#14b8a6",
   words:[
-    ["adapter/adaptor","przejściówka"],
-    ["adjust","regulować"],
-    ["assemble","zmontować"],
-    ["earth (BrE)/ground (AmE)","uziemienie; uziemić"],
-    ["extension lead (BrE)/cord (AmE)","przedłużacz"],
-    ["follow safety/assembly/setup instructions","postępować zgodnie z instrukcją bezpieczeństwa/montażu/konfiguracji"]
+    ["insert/replace/dispose of batteries/the ink cartridge","włożyć/wymienić/wyrzucić baterie/pojemnik z tuszem"],
+    ["instruction/reference/user manual/guide","instrukcja obsługi"],
+    ["plug","wtyczka"],
+    ["return/restore sth to factory settings","przywrócić ustawienia fabryczne"],
+    ["set up","skonfigurować"],
+    ["socket/power point/outlet","gniazdko elektryczne"]
+  ]
+},
+
+"angielski-komputery": {
+  id:"angielski-komputery", title:"Komputery i smartfony", emoji:"💻",
+  description:"Słownictwo związane z komputerami, smartfonami i obsługą aplikacji", color:"#8b5cf6",
+  words:[
+    ["back sth up to the cloud","zapisać kopię zapasową czegoś w chmurze"],
+    ["bookmark a site","dodać stronę do zakładek"],
+    ["boot (up)/reboot a PC","uruchomić/zrestartować komputer"],
+    ["character","znak (np. litera, cyfra)"],
+    ["compose a message","zredagować wiadomość"],
+    ["confirm your password","potwierdzić hasło"],
+    ["customise your toolbar","dostosować pasek narzędzi"],
+    ["data usage","zużycie danych"],
+    ["dialogue box","okno dialogowe"],
+    ["enable two-factor authentication","włączyć uwierzytelnianie dwuetapowe"],
+    ["encrypt information","szyfrować informacje"],
+    ["face/facial recognition","rozpoznawanie twarzy"],
+    ["flag an email","oflagować wiadomość"],
+    ["high/low resolution","wysoka/niska rozdzielczość"],
+    ["increase/decrease font size","zwiększyć/zmniejszyć czcionkę"],
+    ["insert a table/diagram","wstawić tabelę/schemat"],
+    ["install/uninstall apps","instalować/odinstalowywać aplikacje"],
+    ["Internet provider","dostawca Internetu"],
+    ["keyboard shortcuts","skróty klawiszowe"],
+    ["load","wczytać, załadować się"],
+    ["massive storage capacity","ogromna pojemność pamięci"],
+    ["mute/unmute","wyciszyć/wyłączyć wyciszenie"],
+    ["navigate a document/website","poruszać się po dokumencie/stronie internetowej"],
+    ["photo editing software","oprogramowanie do edycji zdjęć"],
+    ["portrait/landscape orientation","orientacja pionowa/pozioma"],
+    ["predictive text","funkcja przewidywania wprowadzanego tekstu"],
+    ["screen lock","blokada ekranu"],
+    ["scroll through/up/down","przewinąć coś/w górę/w dół"],
+    ["spam filter","filtr antyspamowy"],
+    ["spreadsheet","arkusz kalkulacyjny"],
+    ["switch off data roaming","wyłączyć roaming danych"],
+    ["tempered glass screen protector","szkło hartowane na ekran"],
+    ["text-to-speech feature","funkcja zamiany tekstu na mowę"]
   ]
 }
 
@@ -144,9 +141,8 @@ const VOCAB_SETS = {
 
 // Kolejność kart w menu
 const SET_ORDER = [
-  "angielski-badania",
-  "angielski-wynalazki",
-  "angielski-urzadzenia"
+  "angielski-urzadzenia",
+  "angielski-komputery"
 ];
 
 function setTheme(t) {
